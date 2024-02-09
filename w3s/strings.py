@@ -13,7 +13,7 @@ x = txt[2:5]
 #4
 txt = " Hello World "
 x = txt.strip()
-
+#remove space
 #5
 txt = "Hello World"
 txt = txt.upper()
@@ -30,3 +30,4 @@ txt = txt.replace("H", "J")
 age = 36
 txt = "My name is John, and I am {}"
 print(txt.format(age))
+
