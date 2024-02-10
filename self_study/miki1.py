@@ -1,5 +1,8 @@
-x = "Miki"
+x = "awesome"
 
 def myfunc():
-    print(x + "smart one")
+    global x
+    x = "perfect"
+
 myfunc()
+print ("Miki is" + x)
