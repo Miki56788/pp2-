@@ -1,6 +1,8 @@
 #1
 fruits = ["apple", "banana", "cherry"]
 print(fruits[1])
+#list items are ordered changeble  and allow duplecate values 
+#index s nulya []
 
 #2
 fruits = ["apple", "banana", "cherry"]

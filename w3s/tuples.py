@@ -1,6 +1,7 @@
 #1
 fruits = ("apple", "banana", "cherry")
 print(fruits[0])
+#tuple ()and unchangeable and ordered and index and allow duplicate values
 
 #2
 fruits = ("apple", "banana", "cherry")

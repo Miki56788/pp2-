@@ -8,3 +8,5 @@ class Class_1:
 obj_1 = Class_1()
 obj_1.getString()
 obj_1.printString()
+
+#классы для сложных штук ООП;  чертеж метды через функции делаются

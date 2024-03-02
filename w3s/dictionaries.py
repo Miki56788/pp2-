@@ -7,6 +7,7 @@ car =	{
 }
 print(car.get("model"))
 print(car["model"])
+#dictionaries a ={} ordered changeable and allow duplicates 
 
 #2
 car =	{
@@ -31,3 +32,4 @@ car.pop("model")
 #5
 car.clear()
 #delete full 
+#dictionaries a ={} ordered changeable and allow duplicates 
