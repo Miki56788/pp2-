@@ -1,58 +1,43 @@
 import pygame
+import datetime
 import os
-from datetime import datetime
-
-_image_library = {}
-def get_image(path):
-    image = _image_library.get(path)
-    if image == None:
-        canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
-        image = pygame.image.load(canonicalized_path)
-        _image_library[path] = image
-    return image
 
 pygame.init()
-
-WIDTH, HEIGHT = 400, 400
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
 done = False
-pygame.display.set_caption("Simple Clock")
 
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
 
-clock_image = pygame.transform.scale(get_image('../assets/images/alarm-clock.png'), (350, 350))
-minute_hand_img = pygame.transform.rotate(pygame.transform.scale(get_image('../assets/images/minutes_hand.png'), (180, 180)), -225)
-second_hand_img = pygame.transform.scale(get_image('../assets/images/seconds_hand.png'), (300, 300))
-
+window_width = 829
+window_height = 836
+game_display = pygame.display.set_mode((window_width, window_height))
 clock = pygame.time.Clock()
+print(os.getcwd())
 
-def rotate_center(image, angle):
-    rotated_image = pygame.transform.rotate(image, angle)
-    new_rect = rotated_image.get_rect(center=image.get_rect(center=(WIDTH//2, HEIGHT//2)).center)
-    return rotated_image, new_rect
-
-def draw_clock_hands():
-    current_time = datetime.now()
-    second_angle = - current_time.second * 6
-    minute_angle = - current_time.minute * 6
-
-    rotated_minute_hand, minute_hand_rect = rotate_center(minute_hand_img, minute_angle)
-    screen.blit(rotated_minute_hand, minute_hand_rect)
-
-    rotated_second_hand, second_hand_rect = rotate_center(second_hand_img, second_angle)
-    screen.blit(rotated_second_hand, second_hand_rect)
+bg = pygame.image.load(os.path.normpath('main1.png'))
+hand_second = pygame.image.load(os.path.normpath('lefthand.png'))
+hand_minute = pygame.image.load(os.path.normpath('righthand.png'))
+rect = bg.get_rect(center=(415, 418))
 
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+    time = datetime.datetime.now()
 
-    screen.fill(WHITE)
-
-    screen.blit(clock_image, ((WIDTH - 352) // 2, (HEIGHT - 384) // 2))
-    draw_clock_hands()
-
+    angle_second = -(time.second * 6)
+    angle_minute = -(time.minute * 6)
+                
+    game_display.blit(bg, (0, 0))
+    
+    
+    hand_minute_img = pygame.transform.rotate(hand_minute, angle_minute)
+    hand_minute_rect = hand_minute_img.get_rect(center=rect.center)
+    game_display.blit(hand_minute_img, hand_minute_rect.topleft)
+    
+    hand_second_img = pygame.transform.rotate(hand_second, angle_second)
+    hand_second_rect = hand_second_img.get_rect(center=rect.center)
+    game_display.blit(hand_second_img, hand_second_rect.topleft)
+    
+    
     pygame.display.flip()
-
-    clock.tick(60)
+    
+pygame.quit()
