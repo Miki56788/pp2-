@@ -27,7 +27,7 @@ wasted = pygame.transform.scale(wasted, (400, 600))
 
 bg = pygame.image.load("AnimatedStreet.png")
 
-pygame.mixer.music.load('background.wav')
+pygame.mixer.music.load('lab8_Racer_background.wav')
 pygame.mixer.music.play(-1)
 
 class Enemy(pygame.sprite.Sprite):
@@ -107,7 +107,7 @@ while True:
     
 
     if pygame.sprite.spritecollideany(P1, enemies): 
-        pygame.mixer.music.load('crash.wav')
+        pygame.mixer.music.load('lab8_Racer_crash.wav')
         pygame.mixer.music.play()
 
         SURF.blit(wasted, (0, 0))
