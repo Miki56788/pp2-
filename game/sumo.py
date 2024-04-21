@@ -1,6 +1,6 @@
 import pygame, sys, random
 
-window_width, window_height = 800, 600
+window_width, window_height = 800, 800
 icon_width, icon_height = 40, 40
 clock = pygame.time.Clock()
 
@@ -9,7 +9,7 @@ class Game:   ##class for handling game itself
         pygame.init()
         self.screen = pygame.display.set_mode((window_width, window_height))
 
-        pygame.display.set_caption("Sumoring")
+        pygame.display.set_caption("~Sumozin kkk~")
         pygame.mouse.set_visible(False)
 
         self.bg = pygame.image.load("images/sumoring.jpeg").convert()
@@ -24,11 +24,14 @@ class Game:   ##class for handling game itself
         self.player = Player()
         self.sprite_list.add(self.player)
         self._running = True
-        self.fighter = Fighter()
-        self.sprite_list.add(self.fighter)
+
+        for i in range(5):
+            self.sprite_list.add(Fighter())
+            self.sprite_list.add(Gfood())
+            self.sprite_list.add(Bfood())
 
     def on_exec(self):
-        while (self._running):
+        while ( self._running):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -70,18 +73,28 @@ class Game:   ##class for handling game itself
 
     def detect_collide(self):
         for sprite in self.sprite_list:
-            if pygame.sprite.collide_rect(sprite, self.player):
+            if pygame.sprite.collide_rect(sprite,self.player):
                 if sprite.__class__.__name__ != 'Player':
-                    self.player.fly(sprite.getdir())
-            if pygame.sprite.collide_rect(sprite, self.fighter):
-                if sprite.__class__.__name__ != 'Fighter':
-                    self.fighter.fly(sprite.getdir())
+                    if sprite.__class__.__name__ == 'Gfood':
+                        self.player.eat()
+                        self.sprite_list.remove(sprite)
+                        self.sprite_list.add(Gfood())
+                    elif sprite.__class__.__name__ == 'Bfood':
+                        self.player.damage()
+                        self.sprite_list.remove(sprite)
+                        self.sprite_list.add(Bfood())
+                    else:
+                        self.player.fly(sprite.getdir())
 
     def update(self):   # border collide
         end = False
         for sprite in self.sprite_list:
             if sprite.update() == True:
-                if sprite.__class__.__name__ == 'Player':
+                if sprite.__class__.__name__ == 'Gfood':
+                    new = Gfood()
+                elif sprite.__class__.__name__ == 'Bfood':
+                    new = Bfood()
+                elif sprite.__class__.__name__ == 'Player':
                     end = sprite.death()
                     continue
                 else:
@@ -99,47 +112,28 @@ class Obj(pygame.sprite.Sprite):    ##class for every object in screen
 
         self.rect = self.image.get_rect()
         self.speed = speed
-        self.direction = 0
         self.border = False
 
     def up(self):
-        self.direction = 1
         if self.rect.y > 0:
             self.rect.y -= self.speed
         else:
             self.border = True
-
     def down(self):
-        self.direction = 2
         if self.rect.y + icon_height < window_height:
             self.rect.y += self.speed
         else:
             self.border = True
-
     def left(self):
-        self.direction = 3
         if self.rect.x > 0:
             self.rect.x -= self.speed
         else:
             self.border = True
-
     def right(self):
-        self.direction = 4
         if self.rect.x + icon_width < window_width :
             self.rect.x += self.speed
         else:
             self.border = True
-
-    def fly(self, direction):
-        if direction == 1:                 #top
-            self.down()
-        elif direction == 2:               #down
-            self.up()
-        elif direction == 3:               #left
-            self.right()
-        else:                              #right
-            self.left()
-        
 
 class Player(Obj):
     def __init__(self):
@@ -161,6 +155,16 @@ class Player(Obj):
     def eat(self):
         self.weight += 10
 
+    def fly(self, direction):
+        if direction == 1:                 #top
+            self.down()
+        elif direction == 2:               #down
+            self.up()
+        elif direction == 3:               #left
+            self.right()
+        else:                              #right
+            self.left()
+
     def update(self):
         if self.weight == 0:
             return True
@@ -174,9 +178,6 @@ class Player(Obj):
             return True
         else:
             return False
-        
-    def getdir(self):
-        return self.direction
 
 class Obj2(Obj):
     def __init__(self, str_icon):
@@ -215,7 +216,6 @@ class Fighter(Obj2):
         super().__init__("images/opp.png")
     def getdir(self):
         return self.spawn_side
-    
 class Gfood(Obj2):
     def __init__(self):
         super().__init__("images/gfood.jpg")

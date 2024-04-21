@@ -14,7 +14,7 @@ DOJO_X = (WIDTH - DOJO_WIDTH) // 2
 DOJO_Y = (HEIGHT - DOJO_HIGHT) // 2
 
 # Set up the bots
-BOT_SIZE = 5
+BOT_SIZE = 100
 BOT_OFFSET = BOT_SIZE // 2
 BOT_LINEAR_SPEED = 200
 BOT_ANGULAR_SPEED = 1
@@ -26,12 +26,13 @@ EXPLOSION_TIME = 50
 # Bot colors available
 RED = "red.png"
 BLUE = "blue.png"
-#GREEN = "green.png"
-#YELLOW = "yellow.png"
-ORANGE = "ORANGEE.PNG"
-PURPLE = "PURPLEE.PNG"
-#BLACK = "black.png"
-#BROWN = "brown.png"
+GREEN = "green.png"
+YELLOW = "yellow.png"
+ORANGE = "orange.png"
+PURPLE = "purple.png"
+BLACK = "black.png"
+ORANGE = "orange.png"
+BROWN = "brown.png"
 
 # define the RGB values for some colors.
 RGB_WHITE = (255, 255, 255)
