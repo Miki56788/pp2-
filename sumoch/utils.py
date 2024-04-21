@@ -24,15 +24,14 @@ EPSILON = int(BOT_SIZE * 0.9)
 EXPLOSION_TIME = 50
 
 # Bot colors available
-RED = "red.png"
-BLUE = "blue.png"
-GREEN = "green.png"
-YELLOW = "yellow.png"
-ORANGE = "orange.png"
-PURPLE = "purple.png"
-BLACK = "black.png"
-ORANGE = "orange.png"
-BROWN = "brown.png"
+RED = "REDI.PNG"
+BLUE = "BLUEE.PNG"
+#GREEN = "green.png"
+#YELLOW = "yellow.png"
+ORANGE = "ORANGEE.PNG"
+PURPLE = "PURPLEE.PNG"
+#BLACK = "black.png"
+#BROWN = "brown.png"
 
 # define the RGB values for some colors.
 RGB_WHITE = (255, 255, 255)
