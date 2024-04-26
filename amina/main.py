@@ -13,7 +13,7 @@ clock = pygame.time.Clock()
 dt = 0
 
 # fill the screen with a color to wipe away anything from last frame
-background = pygame.image.load(path_join('images', "IMG_9495.JPG")).convert()
+background = pygame.image.load(path_join('images', "background.jpg")).convert()
 dojo = pygame.image.load(path_join('images', "background_dojo.jpg")).convert_alpha()
 explosion1 = pygame.image.load(path_join('images', "explosion1.png")).convert_alpha()
 explosion2 = pygame.image.load(path_join('images', "explosion2.png")).convert_alpha()
@@ -139,7 +139,7 @@ title_rect.center = (su.WIDTH // 2, (su.HEIGHT - su.DOJO_HIGHT) // 4)
 
 # Create the bots.
 r1 = bot(su.RED, su.WIDTH * 1 / 4, su.HEIGHT / 2, 0)
-r2 = bot(su.BLUE, su.WIDTH * 3 / 4, su.HEIGHT / 2, 0)
+r2 = bot(su.BLUE, su.WIDTH * 3 / 4, su.HEIGHT / 2, 180)
 
 running = True
 while running:
